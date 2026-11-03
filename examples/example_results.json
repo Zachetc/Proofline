@@ -1,0 +1,131 @@
+{
+  "source": "SYNTHETIC EXAMPLE DATA ONLY",
+  "invoice_reconciliation": {
+    "summary": {
+      "total": 4,
+      "matched": 2,
+      "exceptions": 2,
+      "exception_rate": 0.5,
+      "at_risk_amount": "10600.00"
+    },
+    "items": [
+      {
+        "key": "V-1|INV-1001",
+        "invoice_id": "INV-1001",
+        "vendor_id": "V-1",
+        "po_id": "PO-10",
+        "amount": "2400.00",
+        "currency": "USD",
+        "status": "MATCHED",
+        "flags": []
+      },
+      {
+        "key": "V-2|INV-1002",
+        "invoice_id": "INV-1002",
+        "vendor_id": "V-2",
+        "po_id": "PO-11",
+        "amount": "8100.00",
+        "currency": "USD",
+        "status": "MATCHED",
+        "flags": []
+      },
+      {
+        "key": "V-2|INV-1002",
+        "invoice_id": "INV-1002",
+        "vendor_id": "V-2",
+        "po_id": "PO-11",
+        "amount": "8100.00",
+        "currency": "USD",
+        "status": "EXCEPTION",
+        "flags": [
+          "DUPLICATE_IN_BATCH"
+        ]
+      },
+      {
+        "key": "V-3|INV-1003",
+        "invoice_id": "INV-1003",
+        "vendor_id": "V-3",
+        "po_id": "PO-10",
+        "amount": "2500.00",
+        "currency": "USD",
+        "status": "EXCEPTION",
+        "flags": [
+          "VENDOR_MISMATCH",
+          "AMOUNT_MISMATCH"
+        ]
+      }
+    ],
+    "note": "At-risk amount is flagged invoice face value, not verified fraud or recoverable savings."
+  },
+  "assurance_insights": {
+    "total": 6,
+    "counts": {
+      "APPROVED": 2,
+      "REVIEW": 1,
+      "BLOCKED": 3
+    },
+    "approval_rate": 0.3333,
+    "exposure_by_status_usd": {
+      "APPROVED": "7400.00",
+      "REVIEW": "18000.00",
+      "BLOCKED": "84700.00"
+    },
+    "top_findings": [
+      {
+        "code": "HIGH_VALUE",
+        "count": 2
+      },
+      {
+        "code": "STALE_EVIDENCE",
+        "count": 1
+      },
+      {
+        "code": "INCOMPLETE_COVERAGE",
+        "count": 1
+      },
+      {
+        "code": "VERY_HIGH_VALUE",
+        "count": 1
+      },
+      {
+        "code": "NO_VERIFIED_INVOICE",
+        "count": 1
+      },
+      {
+        "code": "DUPLICATE_INVOICE",
+        "count": 1
+      },
+      {
+        "code": "PII_IN_RATIONALE",
+        "count": 1
+      }
+    ],
+    "recommendations": [
+      {
+        "priority": "high",
+        "finding": "Potential duplicate payment attempts",
+        "count": 1,
+        "action": "Reconcile vendor and invoice IDs against the AP ledger before payment."
+      },
+      {
+        "priority": "high",
+        "finding": "Evidence gaps",
+        "count": 1,
+        "action": "Request current, trusted source documents before release."
+      },
+      {
+        "priority": "high",
+        "finding": "Sensitive data in decision text",
+        "count": 1,
+        "action": "Investigate source handling and redact before sharing."
+      },
+      {
+        "priority": "medium",
+        "finding": "Human approval workload",
+        "count": 1,
+        "action": "Assign reviewers with separation of duties and record a reason for every disposition."
+      }
+    ],
+    "limitations": "Descriptive counts of assessed decisions; not proof of actual fraud, realized savings, or model accuracy."
+  }
+}
